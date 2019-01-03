@@ -23,8 +23,8 @@ uas = [
 
 
 def get_ip_fromkuaidaili(num = 100):
-    """获取代理IP256163982446923610"""
-    api_url = "http://dev.kdlapi.com/api/getproxy/?orderid=984484686189625&num={}&b_pcchrome=1&b_pcie=1&b_pcff=1&protocol=1&method=2&an_tr=1&an_an=1&an_ha=1&dedup=1&sep=1".format(num)
+    """获取代理IP,这个是花钱买的，直接接入API"""
+    api_url = "http://?????&num={}&b_pcchrome=1&b_pcie=1&b_pcff=1&protocol=1&method=2&an_tr=1&an_an=1&an_ha=1&dedup=1&sep=1".format(num)
     response_api= requests.get(api_url)
     # print(response_api.status_code)  # 获取Reponse的返回码
     r_html = response_api.text
@@ -106,15 +106,17 @@ def goworking(vote_num):
         print("获得IP地址%s条"% len(ips))
         for i in range(len(ips)):
             # 启用线程，隔1秒产生一个线程，可控制时间加快投票速度 ,time.sleep的最小单位是毫秒
+            # 可以给多人投票            
             # print("开始第%s次post请求" % i)
-            # t2 = threading.Thread(target=get_url, args=(i, ips, ['836', '837', '840', '440', '444']))
-            t2 = threading.Thread(target=get_url, args=(i, ips,['838',]))
+            # t2 = threading.Thread(target=get_url, args=(i, ips, ['123', '124', '888', '666', '444']))
+            t2 = threading.Thread(target=get_url, args=(i, ips,['123',]))
             t2.start()
             time.sleep(0.1)
 
 if __name__ == '__main__':
     while(True):
         top1_num = int(top20.get_top())
+        # 打算竞争第几名就输入名次        
         top1_num = int(top20.get_top2(3))
         me_num = int(top20.spider_one(838)[3])
         print("敌人票数%s" % top1_num)
@@ -124,7 +126,7 @@ if __name__ == '__main__':
         print("距离第一差%s票(正表示我比别人多)" % req_num)
         # 输入目标，正数表示位居第一，超越后来者N票。负数表示比第一少N票，位居第二
         goal = 800
-        # 发送拉票请求
+        # 发送拉票请求，因为有效率也就60%+，所以要多投一些
         vote_num = int((goal + top1_num - me_num) * 1.2)
         if vote_num > 1500:
             goworking(1500)
