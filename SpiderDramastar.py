@@ -36,7 +36,7 @@ def file_do(list_info):
             writer.writerows(list_info)
 
 def spider_one(id):
-    url_web="http://t.dramastar.org/{}.html".format(id)
+    url_web="http://???????.org/{}.html".format(id)
     response_web=requests.get(url=url_web,headers=header)
     soup = BeautifulSoup(response_web.text,'html.parser')
     sp_div = soup.find('div',class_ = 'teacher_info_yc')
@@ -57,6 +57,7 @@ def spider_one(id):
 if __name__ == '__main__':
     while(True):
         list_all = []
+#         一共862个候选者
         for id in range(1,862):
             list_one = spider_one(id)
             list_all.append(list_one)
